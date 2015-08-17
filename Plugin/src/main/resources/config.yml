@@ -1,0 +1,23 @@
+#Let Giants spawn naturally? (They are not normally hostile, you could compare them to useless sheep). Their spawn frequency will be equivalent to an Enderman's.
+#This plugin and its config are not reloadable.
+#Note: This feature is in somewhat of a beta. Use at your own risk.
+naturalSpawns: false
+isHostile: false
+attackDamage: 5.0
+
+#Natural spawn settings.
+#Spawn frequency (Witch is 5, Zombie is 100)
+frequency: 5
+#You'll have to experiment with these variables. I'm not able to wrap my head around them myself.
+#This is what they're described as in Forge's API.
+minGroupAmount: 1
+maxGroupAmount: 1
+#Should they spawn during day, or at night? (true = During the day, false = At night)
+daylight: false
+
+#Allowed in worlds:
+#Example -
+#worlds:
+#- main
+#- main_resource
+worlds: []

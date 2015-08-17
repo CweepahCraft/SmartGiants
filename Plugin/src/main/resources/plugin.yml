@@ -1,0 +1,9 @@
+name: SmartGiants
+main: me.jjm_223.smartgiants.SmartGiants
+author: jjm_223
+description: Makes giants a little smarter/cuter/meaner.
+version: 2.0.2
+commands:
+    smartgiants:
+        usage: /smartgiants
+        description: Commands for the SmartGiants plugin.
