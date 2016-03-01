@@ -10,7 +10,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class NaturalSpawns implements INaturalSpawns {
-
     private boolean hostile;
     private int frequency;
     private int minGroupAmount;

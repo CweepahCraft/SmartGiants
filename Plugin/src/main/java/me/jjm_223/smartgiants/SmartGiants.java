@@ -1,15 +1,15 @@
 package me.jjm_223.smartgiants;
 
-import me.jjm_223.smartgiants.api.entities.INaturalSpawns;
-import me.jjm_223.smartgiants.commands.CommandSmartGiants;
 import me.jjm_223.smartgiants.api.entities.ILoad;
-import me.jjm_223.smartgiants.listeners.GiantDeath;
-import me.jjm_223.smartgiants.listeners.GiantSpawn;
-import me.jjm_223.smartgiants.listeners.Reload;
+import me.jjm_223.smartgiants.api.entities.INaturalSpawns;
+import me.jjm_223.smartgiants.commands.*;
+import me.jjm_223.smartgiants.listeners.EntityListener;
+import me.jjm_223.smartgiants.listeners.ReloadListener;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Jacob on 3/14/2015.
@@ -17,23 +17,13 @@ import java.io.File;
  */
 public class SmartGiants extends JavaPlugin {
 
-    FileConfiguration config;
-    boolean errored;
+    private FileConfiguration config;
+    private boolean error;
 
-    ILoad load;
-    INaturalSpawns naturalSpawns;
+    private ILoad load;
+    private INaturalSpawns naturalSpawns;
 
-    DropManager dropManager;
-
-    private static File pluginFolder;
-
-    public DropManager getDropManager() {
-        return dropManager;
-    }
-
-    public static File getPluginFolder() {
-        return pluginFolder;
-    }
+    private DropManager dropManager;
 
     public void load() {
         config = this.getConfig();
@@ -82,13 +72,12 @@ public class SmartGiants extends JavaPlugin {
             e.printStackTrace();
             getLogger().severe("This Spigot version is not supported.");
             getLogger().info("Check for updates at https://www.spigotmc.org/resources/smartgiants.4882/");
-            errored = true;
+            error = true;
         }
     }
 
     @Override
     public void onLoad() {
-        pluginFolder = this.getDataFolder();
         saveResource("lang.yml", false);
         saveDefaultConfig();
         load();
@@ -96,21 +85,53 @@ public class SmartGiants extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if (!errored) {
-            new ItemManager(this);
-            getCommand("smartgiants").setExecutor(new CommandSmartGiants(this));
-            getServer().getPluginManager().registerEvents(new GiantDeath(this), this);
-            getServer().getPluginManager().registerEvents(new GiantSpawn(this), this);
+        if (!error) {
+            Messages.loadMessages(this);
+            try {
+                dropManager = new DropManager(this);
+            } catch (IOException e) {
+                e.printStackTrace();
+                getLogger().severe("Unable to load drops.");
+            }
 
-            new Reload(this);
+            registerCommands();
+            registerEvents();
         } else {
             this.setEnabled(false);
         }
     }
 
+    public boolean reloadDrops() {
+        dropManager.shutdown();
+        try {
+            dropManager = new DropManager(this);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void registerEvents() {
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new EntityListener(this), this);
+        pm.registerEvents(new ReloadListener(this), this);
+    }
+
+    private void registerCommands() {
+        getCommand("smartgiants").setExecutor(new CommandBase());
+        new CommandAdd(this);
+        new CommandRemove(this);
+        new CommandReset(this);
+        new CommandReloadDrops(this);
+    }
+
     @Override
     public void onDisable() {
-        ItemManager.unsafeSave();
-        getLogger().info("Saved drops.");
+        dropManager.shutdown();
+    }
+
+    public DropManager getDropManager() {
+        return dropManager;
     }
 }

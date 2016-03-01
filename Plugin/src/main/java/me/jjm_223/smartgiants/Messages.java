@@ -14,14 +14,11 @@ public class Messages {
     private static boolean isLoaded = false;
 
     public static String getLang(String section) {
-        if (!isLoaded) {
-            loadMessages();
-        }
         return ChatColor.translateAlternateColorCodes('&', config.getString(section));
     }
 
-    private static void loadMessages() {
-        File configFile = new File(SmartGiants.getPluginFolder().getAbsolutePath() + File.separator + "lang.yml");
+    public static void loadMessages(SmartGiants plugin) {
+        File configFile = new File(plugin.getDataFolder(), "lang.yml");
         try {
             config.load(configFile);
             isLoaded = true;

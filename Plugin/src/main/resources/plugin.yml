@@ -2,7 +2,7 @@ name: SmartGiants
 main: me.jjm_223.smartgiants.SmartGiants
 author: jjm_223
 description: Makes giants a little smarter/cuter/meaner.
-version: 2.0.2
+version: 2.1.0
 commands:
     smartgiants:
         usage: /smartgiants
