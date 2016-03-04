@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.jjm_223.smartgiants.entities.v1_9_R1</groupId>
     <artifactId>SmartGiants-v1_9_R1</artifactId>
+    <name>SmartGiants v1_9_R1</name>
 
     <dependencies>
         <dependency>
