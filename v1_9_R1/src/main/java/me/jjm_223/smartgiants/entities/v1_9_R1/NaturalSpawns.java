@@ -38,8 +38,9 @@ public class NaturalSpawns implements INaturalSpawns {
         try {
             for (BiomeBase biomeBase : BiomeBase.i) {
                 if (!biomeBase.getMobs(EnumCreatureType.MONSTER).isEmpty()) {
-                    biomeBase.getMobs(EnumCreatureType.MONSTER).add(new BiomeBase.BiomeMeta(
-                            (hostile ? SmartGiantHostile.class : SmartGiant.class), frequency, minGroupAmount, maxGroupAmount));
+                    biomeBase.getMobs(EnumCreatureType.MONSTER)
+                            .add(new BiomeBase.BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class),
+                                    frequency, minGroupAmount, maxGroupAmount));
                 }
             }
         } catch (Exception e) {
