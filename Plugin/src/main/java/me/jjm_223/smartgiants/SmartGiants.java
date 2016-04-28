@@ -18,14 +18,50 @@ import java.io.IOException;
 public class SmartGiants extends JavaPlugin {
 
     private FileConfiguration config;
-    private boolean error;
+    private boolean errorOnLoad;
 
     private ILoad load;
     private INaturalSpawns naturalSpawns;
 
     private DropManager dropManager;
 
-    public void load() {
+    @Override
+    public void onLoad() {
+        saveResource("lang.yml", false);
+        saveDefaultConfig();
+        loadGiants();
+    }
+
+    @Override
+    public void onEnable() {
+        if (!errorOnLoad) {
+            Messages.loadMessages(this);
+            try {
+                dropManager = new DropManager(this);
+            } catch (IOException e) {
+                e.printStackTrace();
+                getLogger().severe("Unable to load drops.");
+            }
+
+            registerCommands();
+            registerEvents();
+        } else {
+            this.setEnabled(false);
+        }
+    }
+
+    public boolean reloadDrops() {
+        dropManager.shutdown();
+        try {
+            dropManager = new DropManager(this);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void loadGiants() {
         config = this.getConfig();
 
         boolean natural = config.getBoolean("naturalSpawns");
@@ -72,43 +108,7 @@ public class SmartGiants extends JavaPlugin {
             e.printStackTrace();
             getLogger().severe("This Spigot version is not supported.");
             getLogger().info("Check for updates at https://www.spigotmc.org/resources/smartgiants.4882/");
-            error = true;
-        }
-    }
-
-    @Override
-    public void onLoad() {
-        saveResource("lang.yml", false);
-        saveDefaultConfig();
-        load();
-    }
-
-    @Override
-    public void onEnable() {
-        if (!error) {
-            Messages.loadMessages(this);
-            try {
-                dropManager = new DropManager(this);
-            } catch (IOException e) {
-                e.printStackTrace();
-                getLogger().severe("Unable to load drops.");
-            }
-
-            registerCommands();
-            registerEvents();
-        } else {
-            this.setEnabled(false);
-        }
-    }
-
-    public boolean reloadDrops() {
-        dropManager.shutdown();
-        try {
-            dropManager = new DropManager(this);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+            errorOnLoad = true;
         }
     }
 
