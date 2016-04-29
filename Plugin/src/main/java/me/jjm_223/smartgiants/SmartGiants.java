@@ -4,7 +4,6 @@ import me.jjm_223.smartgiants.api.entities.ILoad;
 import me.jjm_223.smartgiants.api.entities.INaturalSpawns;
 import me.jjm_223.smartgiants.commands.*;
 import me.jjm_223.smartgiants.listeners.EntityListener;
-import me.jjm_223.smartgiants.listeners.ReloadListener;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,8 +31,8 @@ public class SmartGiants extends JavaPlugin {
     private FileConfiguration config;
     private boolean errorOnLoad;
 
-    private ILoad load;
-    private INaturalSpawns naturalSpawns;
+    private ILoad load = null;
+    private INaturalSpawns naturalSpawns = null;
 
     private DropManager dropManager;
 
@@ -108,13 +107,12 @@ public class SmartGiants extends JavaPlugin {
             final Class<?> clazzNaturalSpawns = Class.forName("me.jjm_223.smartgiants.entities." + version +
                     ".NaturalSpawns");
             if (ILoad.class.isAssignableFrom(clazzLoad) && INaturalSpawns.class.isAssignableFrom(clazzNaturalSpawns)) {
-                this.load = (ILoad) clazzLoad.getConstructor(boolean.class)
-                        .newInstance(hostile);
+                this.load = (ILoad) clazzLoad.getConstructor().newInstance();
                 if (natural) {
-                    this.naturalSpawns = (INaturalSpawns) clazzNaturalSpawns.getConstructor(boolean.class,
-                            boolean.class, int.class, int.class, int.class).newInstance(hostile, daylight, frequency,
-                            minGroupAmount, maxGroupAmount);
+                    this.naturalSpawns = (INaturalSpawns) clazzNaturalSpawns.getConstructor().newInstance();
+                    this.naturalSpawns.load(hostile, daylight, frequency, minGroupAmount, maxGroupAmount);
                 }
+                load.load(hostile);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +125,6 @@ public class SmartGiants extends JavaPlugin {
     private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new EntityListener(this), this);
-        pm.registerEvents(new ReloadListener(this), this);
     }
 
     private void registerCommands() {
@@ -141,6 +138,14 @@ public class SmartGiants extends JavaPlugin {
     @Override
     public void onDisable() {
         dropManager.shutdown();
+
+        if (load != null) {
+            load.cleanup();
+        }
+
+        if (naturalSpawns != null) {
+            naturalSpawns.cleanup();
+        }
     }
 
     public DropManager getDropManager() {
