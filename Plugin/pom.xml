@@ -5,7 +5,7 @@
     <parent>
         <artifactId>smartgiants-parent</artifactId>
         <groupId>me.jjm_223.smartgiants</groupId>
-        <version>2.1.0-SNAPSHOT</version>
+        <version>2.2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -41,7 +41,15 @@
         <dependency>
             <groupId>me.jjm_223.smartgiants</groupId>
             <artifactId>SmartGiants-v1_9_R1</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>me.jjm_223.smartgiants</groupId>
+            <artifactId>SmartGiants-v1_9_R2</artifactId>
+            <version>${project.parent.version}</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
@@ -56,11 +64,8 @@
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.8.8-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
-            <optional>true</optional>
+            <artifactId>spigot-api</artifactId>
+            <version>1.8-R0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -84,6 +89,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>1.4</version>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>me.jjm_223.smartgiants:*</include>
+                        </includes>
+                    </artifactSet>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
