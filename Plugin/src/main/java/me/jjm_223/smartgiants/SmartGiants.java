@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -38,7 +39,9 @@ public class SmartGiants extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        saveResource("lang.yml", false);
+        if (!new File(getDataFolder(), "lang.yml").exists()) {
+            saveResource("lang.yml", false);
+        }
         saveDefaultConfig();
         loadGiants();
     }
