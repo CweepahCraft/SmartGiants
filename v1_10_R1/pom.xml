@@ -9,14 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>SmartGiants-v1_9_R2</artifactId>
-    <name>SmartGiants v1_9_R2</name>
+    <artifactId>SmartGiants-v1_10_R1</artifactId>
+    <name>SmartGiants v1_10_R1</name>
 
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.9.4-R0.1-SNAPSHOT</version>
+            <version>1.10-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>me.jjm_223.smartgiants</groupId>

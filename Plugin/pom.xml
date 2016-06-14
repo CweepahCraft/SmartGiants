@@ -5,7 +5,7 @@
     <parent>
         <artifactId>smartgiants-parent</artifactId>
         <groupId>me.jjm_223.smartgiants</groupId>
-        <version>2.2.0-SNAPSHOT</version>
+        <version>2.2.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -49,6 +49,14 @@
         <dependency>
             <groupId>me.jjm_223.smartgiants</groupId>
             <artifactId>SmartGiants-v1_9_R2</artifactId>
+            <version>${project.parent.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>me.jjm_223.smartgiants</groupId>
+            <artifactId>SmartGiants-v1_10_R1</artifactId>
             <version>${project.parent.version}</version>
             <type>jar</type>
             <scope>compile</scope>
