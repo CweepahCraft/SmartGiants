@@ -17,7 +17,7 @@ public class Drop {
             maxAmount = 1;
         }
 
-        if (percentChance <= 0) {
+        if (percentChance <= 0 || percentChance > 100) {
             percentChance = 100;
         }
 

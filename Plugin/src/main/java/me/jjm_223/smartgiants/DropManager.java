@@ -43,7 +43,7 @@ public class DropManager {
         List<ItemStack> results = new ArrayList<ItemStack>();
 
         for (Drop drop : drops) {
-            if (random.nextInt((int) (100 / drop.getPercentChance())) == 0) {
+            if (random.nextInt((int) Math.ceil(100 / drop.getPercentChance())) == 0) {
                 ItemStack item = drop.getItem();
                 item.setAmount(random.nextInt(drop.getMaxAmount() - drop.getMinAmount()) + drop.getMinAmount());
                 results.add(item);
