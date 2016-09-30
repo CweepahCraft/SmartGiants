@@ -10,7 +10,7 @@ import org.bukkit.Bukkit;
  */
 
 @SuppressWarnings("unchecked")
-public class SmartGiantHostile extends EntityGiantZombie {
+public class SmartGiantHostile extends SmartGiant {
 
     private static final double ATTACK_DAMAGE = Bukkit.getPluginManager().getPlugin("SmartGiants").getConfig()
             .getDouble("attackDamage");

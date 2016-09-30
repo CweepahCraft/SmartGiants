@@ -1,6 +1,7 @@
 package me.jjm_223.smartgiants.listeners;
 
 import me.jjm_223.smartgiants.SmartGiants;
+import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -30,5 +31,17 @@ public class EntityListener implements Listener {
                 e.setCancelled(true);
             }
         }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPluginSpawn(CreatureSpawnEvent event)
+    {
+        if (plugin.getGiantTools().isSmartGiant(event.getEntity()) || event.getEntityType() != EntityType.GIANT)
+        {
+            return;
+        }
+
+        event.setCancelled(true);
+        plugin.getGiantTools().spawnGiant(event.getLocation(), plugin.getConfig().getBoolean("isHostile"));
     }
 }

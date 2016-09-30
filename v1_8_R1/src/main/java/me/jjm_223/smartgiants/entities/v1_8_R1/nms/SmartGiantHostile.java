@@ -18,7 +18,7 @@ import org.bukkit.Bukkit;
  * Created by Jacob on 3/16/2015.
  * Hostile AI for the SmartGiant
  */
-public class SmartGiantHostile extends EntityGiantZombie {
+public class SmartGiantHostile extends SmartGiant {
 
     private static final double ATTACK_DAMAGE = Bukkit.getPluginManager().getPlugin("SmartGiants").getConfig()
             .getDouble("attackDamage");

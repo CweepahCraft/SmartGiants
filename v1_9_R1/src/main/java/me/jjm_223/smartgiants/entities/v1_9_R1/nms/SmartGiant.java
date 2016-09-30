@@ -6,6 +6,11 @@ public class SmartGiant extends EntityGiantZombie {
     public SmartGiant(World world) {
         super(world);
 
+        if (this instanceof SmartGiantHostile)
+        {
+            return;
+        }
+
         width = 1;
 
         this.goalSelector.a(0, new PathfinderGoalFloat(this));

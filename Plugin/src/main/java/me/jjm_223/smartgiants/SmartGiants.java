@@ -1,5 +1,6 @@
 package me.jjm_223.smartgiants;
 
+import me.jjm_223.smartgiants.api.entities.IGiantTools;
 import me.jjm_223.smartgiants.api.entities.ILoad;
 import me.jjm_223.smartgiants.api.entities.INaturalSpawns;
 import me.jjm_223.smartgiants.commands.*;
@@ -29,11 +30,11 @@ import java.io.IOException;
  */
 public class SmartGiants extends JavaPlugin {
 
-    private FileConfiguration config;
     private boolean errorOnLoad;
 
     private ILoad load = null;
     private INaturalSpawns naturalSpawns = null;
+    private IGiantTools giantTools = null;
 
     private DropManager dropManager;
 
@@ -76,7 +77,7 @@ public class SmartGiants extends JavaPlugin {
     }
 
     private void loadGiants() {
-        config = this.getConfig();
+        FileConfiguration config = this.getConfig();
 
         boolean natural = config.getBoolean("naturalSpawns");
         boolean hostile = config.getBoolean("isHostile");
@@ -109,12 +110,15 @@ public class SmartGiants extends JavaPlugin {
             final Class<?> clazzLoad = Class.forName("me.jjm_223.smartgiants.entities." + version + ".Load");
             final Class<?> clazzNaturalSpawns = Class.forName("me.jjm_223.smartgiants.entities." + version +
                     ".NaturalSpawns");
-            if (ILoad.class.isAssignableFrom(clazzLoad) && INaturalSpawns.class.isAssignableFrom(clazzNaturalSpawns)) {
+            final Class<?> clazzGiantTools = Class.forName("me.jjm_223.smartgiants.entities." + version + ".GiantTools");
+            if (ILoad.class.isAssignableFrom(clazzLoad) && INaturalSpawns.class.isAssignableFrom(clazzNaturalSpawns)
+                    && IGiantTools.class.isAssignableFrom(clazzGiantTools)) {
                 this.load = (ILoad) clazzLoad.getConstructor().newInstance();
                 if (natural) {
                     this.naturalSpawns = (INaturalSpawns) clazzNaturalSpawns.getConstructor().newInstance();
                     this.naturalSpawns.load(hostile, daylight, frequency, minGroupAmount, maxGroupAmount);
                 }
+                this.giantTools = (IGiantTools) clazzGiantTools.getConstructor().newInstance();
                 load.load(hostile);
             }
         } catch (Exception e) {
@@ -149,6 +153,11 @@ public class SmartGiants extends JavaPlugin {
         if (naturalSpawns != null) {
             naturalSpawns.cleanup();
         }
+    }
+
+    public IGiantTools getGiantTools()
+    {
+        return giantTools;
     }
 
     public DropManager getDropManager() {
