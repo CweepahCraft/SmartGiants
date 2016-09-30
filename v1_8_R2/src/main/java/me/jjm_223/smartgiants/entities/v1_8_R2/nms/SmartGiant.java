@@ -1,6 +1,7 @@
 package me.jjm_223.smartgiants.entities.v1_8_R2.nms;
 
 import net.minecraft.server.v1_8_R2.*;
+import org.bukkit.Bukkit;
 
 /**
  * Created by Jacob on 3/14/2015.
@@ -8,9 +9,14 @@ import net.minecraft.server.v1_8_R2.*;
  */
 public class SmartGiant extends EntityGiantZombie
 {
+    private static final double HEALTH = Bukkit.getPluginManager().getPlugin("SmartGiants").getConfig()
+            .getDouble("maxHealth");
+
     public SmartGiant(World world)
     {
         super(world);
+
+        this.getAttributeInstance(GenericAttributes.maxHealth).setValue(HEALTH);
 
         if (this instanceof SmartGiantHostile)
         {

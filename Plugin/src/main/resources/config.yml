@@ -10,6 +10,8 @@ isHostile: false
 # How much damage should Giants do? (5.0 damage is 2.5 hearts)
 attackDamage: 5.0
 
+# What should the maximum health of giants be?
+maxHealth: 100.0
 
 #### Natural spawn settings. ####
 
