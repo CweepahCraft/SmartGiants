@@ -9,36 +9,50 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Messages {
+public class Messages
+{
     private static FileConfiguration config = new YamlConfiguration();
     private static boolean isLoaded = false;
 
-    public static String getLang(String section) {
+    public static String getLang(String section)
+    {
         return ChatColor.translateAlternateColorCodes('&', config.getString(section));
     }
 
-    public static void loadMessages(SmartGiants plugin) {
+    public static void loadMessages(SmartGiants plugin)
+    {
         File configFile = new File(plugin.getDataFolder(), "lang.yml");
-        try {
+        try
+        {
             config.load(configFile);
             isLoaded = true;
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             fallback();
-        } catch (InvalidConfigurationException e) {
+        }
+        catch (InvalidConfigurationException e)
+        {
             fallback();
         }
     }
 
-    private static void fallback() {
+    private static void fallback()
+    {
         InputStream stream = Messages.class.getClassLoader().getResourceAsStream("lang.yml");
-        try {
+        try
+        {
             config.load(stream);
             stream.close();
             isLoaded = true;
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             isLoaded = false;
-        } catch (InvalidConfigurationException e) {
+        }
+        catch (InvalidConfigurationException e)
+        {
             e.printStackTrace();
             isLoaded = false;
         }

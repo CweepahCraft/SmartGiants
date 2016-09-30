@@ -5,12 +5,14 @@ import net.minecraft.server.v1_10_R1.*;
 import org.bukkit.Bukkit;
 
 @SuppressWarnings("unchecked")
-public class SmartGiantHostile extends SmartGiant {
+public class SmartGiantHostile extends SmartGiant
+{
 
     private static final double ATTACK_DAMAGE = Bukkit.getPluginManager().getPlugin("SmartGiants").getConfig()
             .getDouble("attackDamage");
 
-    public SmartGiantHostile(World world) {
+    public SmartGiantHostile(World world)
+    {
         super(world);
 
         width = 1;
@@ -25,13 +27,15 @@ public class SmartGiantHostile extends SmartGiant {
     }
 
     @Override
-    protected void initAttributes() {
+    protected void initAttributes()
+    {
         super.initAttributes();
         this.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE).setValue(ATTACK_DAMAGE);
     }
 
     @Override
-    public float a(BlockPosition position) {
+    public float a(BlockPosition position)
+    {
         return 0.5F - world.n(position);
     }
 }

@@ -14,7 +14,8 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class DropManager {
+public class DropManager
+{
     private FileConfiguration config = new YamlConfiguration();
     private List<Drop> drops = new ArrayList<Drop>();
     private File dropsFile;
@@ -23,14 +24,18 @@ public class DropManager {
 
     private Random random = new Random();
 
-    public DropManager(SmartGiants plugin) throws IOException {
+    public DropManager(SmartGiants plugin) throws IOException
+    {
         dropsFile = new File(plugin.getDataFolder(), "drops.yml");
 
         dropsFile.createNewFile();
 
-        try {
+        try
+        {
             config.load(dropsFile);
-        } catch (InvalidConfigurationException e) {
+        }
+        catch (InvalidConfigurationException e)
+        {
             e.printStackTrace();
             plugin.getLogger().severe("Invalid configuration: drops.yml. Feel free to start fresh if you aren't sure" +
                     " how to fix this. You can reload this config with /smartgiants reloaddrops");
@@ -38,12 +43,15 @@ public class DropManager {
         loadDrops();
     }
 
-    public List<ItemStack> getRandomDrops() {
+    public List<ItemStack> getRandomDrops()
+    {
 
         List<ItemStack> results = new ArrayList<ItemStack>();
 
-        for (Drop drop : drops) {
-            if (random.nextInt((int) Math.ceil(100 / drop.getPercentChance())) == 0) {
+        for (Drop drop : drops)
+        {
+            if (random.nextInt((int) Math.ceil(100 / drop.getPercentChance())) == 0)
+            {
                 ItemStack item = drop.getItem();
                 item.setAmount(random.nextInt(Math.max(drop.getMaxAmount() - drop.getMinAmount(), 1)) + drop.getMinAmount());
                 results.add(item);
@@ -53,9 +61,12 @@ public class DropManager {
         return results;
     }
 
-    public boolean deleteDrop(ItemStack item) {
-        for (Drop drop : drops) {
-            if (drop.getItem().isSimilar(item)) {
+    public boolean deleteDrop(ItemStack item)
+    {
+        for (Drop drop : drops)
+        {
+            if (drop.getItem().isSimilar(item))
+            {
                 drops.remove(drop);
                 saveFile();
                 return true;
@@ -65,19 +76,23 @@ public class DropManager {
         return false;
     }
 
-    public void addDrop(Drop drop) {
+    public void addDrop(Drop drop)
+    {
         drops.add(drop);
         saveFile();
     }
 
-    public void resetDrops() {
+    public void resetDrops()
+    {
         drops.clear();
         saveFile();
     }
 
-    private void updateConfig() {
+    private void updateConfig()
+    {
         config = new YamlConfiguration();
-        for (Drop drop : drops) {
+        for (Drop drop : drops)
+        {
             String base = "drops." + drops.indexOf(drop);
             config.set(base + ".itemStack", drop.getItem());
             config.set(base + ".minAmount", drop.getMinAmount());
@@ -86,13 +101,16 @@ public class DropManager {
         }
     }
 
-    private void loadDrops() {
+    private void loadDrops()
+    {
         drops.clear();
         ConfigurationSection section = config.getConfigurationSection("drops");
-        if (section == null) {
+        if (section == null)
+        {
             return;
         }
-        for (String string : section.getKeys(false)) {
+        for (String string : section.getKeys(false))
+        {
             String base = "drops." + string;
             ItemStack item = config.getItemStack(base + ".itemStack");
             int minAmount = config.getInt(base + ".minAmount");
@@ -103,20 +121,27 @@ public class DropManager {
         }
     }
 
-    private void saveFile() {
+    private void saveFile()
+    {
         updateConfig();
-        executor.submit(new Runnable() {
-            public void run() {
-                try {
+        executor.submit(new Runnable()
+        {
+            public void run()
+            {
+                try
+                {
                     config.save(dropsFile);
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     e.printStackTrace();
                 }
             }
         });
     }
 
-    public void shutdown() {
+    public void shutdown()
+    {
         saveFile();
         executor.shutdown();
     }

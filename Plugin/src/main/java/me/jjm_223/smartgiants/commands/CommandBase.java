@@ -11,7 +11,8 @@ import java.util.List;
 
 import static me.jjm_223.smartgiants.Messages.getLang;
 
-public class CommandBase implements CommandExecutor {
+public class CommandBase implements CommandExecutor
+{
     private static List<CommandBase> subCommands = new ArrayList<CommandBase>();
 
     private final String name;
@@ -19,7 +20,8 @@ public class CommandBase implements CommandExecutor {
     private final boolean playerOnly;
     private final int minArgs;
 
-    public CommandBase(String name, String permission, boolean playerOnly, int minArgs) {
+    public CommandBase(String name, String permission, boolean playerOnly, int minArgs)
+    {
         this.name = name;
         this.permission = permission;
         this.playerOnly = playerOnly;
@@ -27,44 +29,53 @@ public class CommandBase implements CommandExecutor {
         subCommands.add(this);
     }
 
-    public CommandBase() {
+    public CommandBase()
+    {
         this.name = null;
         this.permission = null;
         this.playerOnly = false;
         this.minArgs = 0;
     }
 
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (strings.length < 1) {
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings)
+    {
+        if (strings.length < 1)
+        {
             lecture(commandSender);
             return true;
         }
         List<String> args = Arrays.asList(strings).subList(1, strings.length);
         CommandBase chosen = null;
 
-        for (CommandBase subCommand : subCommands) {
-            if (subCommand.getName().equalsIgnoreCase(strings[0])) {
+        for (CommandBase subCommand : subCommands)
+        {
+            if (subCommand.getName().equalsIgnoreCase(strings[0]))
+            {
                 chosen = subCommand;
                 break;
             }
         }
 
-        if (chosen == null) {
+        if (chosen == null)
+        {
             lecture(commandSender);
             return true;
         }
 
-        if (!(commandSender instanceof Player) && chosen.getPlayerRequired()) {
+        if (!(commandSender instanceof Player) && chosen.getPlayerRequired())
+        {
             commandSender.sendMessage(getLang("mustBePlayer"));
             return true;
         }
 
-        if (chosen.getPermission() != null && !commandSender.hasPermission(chosen.getPermission())) {
+        if (chosen.getPermission() != null && !commandSender.hasPermission(chosen.getPermission()))
+        {
             commandSender.sendMessage(getLang("noPermission"));
             return true;
         }
 
-        if (args.size() < chosen.getMinArgs()) {
+        if (args.size() < chosen.getMinArgs())
+        {
             lecture(commandSender);
             return true;
         }
@@ -73,27 +84,35 @@ public class CommandBase implements CommandExecutor {
         return chosen.execute(commandSender, command, s, args.toArray(newArgs));
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public String getPermission() {
+    public String getPermission()
+    {
         return permission;
     }
 
-    public boolean getPlayerRequired() {
+    public boolean getPlayerRequired()
+    {
         return playerOnly;
     }
 
-    public int getMinArgs() {
+    public int getMinArgs()
+    {
         return minArgs;
     }
 
-    public boolean execute(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean execute(CommandSender sender, Command cmd, String label, String[] args)
+    {
         return false;
-    };
+    }
 
-    protected void lecture(CommandSender sender) {
+    ;
+
+    protected void lecture(CommandSender sender)
+    {
         sender.sendMessage(getLang("lectureBar"));
         sender.sendMessage(getLang("lectureAdd"));
         sender.sendMessage(getLang("lectureRemove"));

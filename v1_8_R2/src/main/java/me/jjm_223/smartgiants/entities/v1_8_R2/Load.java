@@ -8,11 +8,11 @@ import net.minecraft.server.v1_8_R2.EntityGiantZombie;
 import net.minecraft.server.v1_8_R2.EntityTypes;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class Load implements ILoad {
+public class Load implements ILoad
+{
     private Field c;
     private Field d;
     private Field e;
@@ -20,50 +20,68 @@ public class Load implements ILoad {
     private Field g;
     private Method a;
 
-    public Load() {
-        try {
+    public Load()
+    {
+        try
+        {
             a = EntityTypes.class.getDeclaredMethod("a", Class.class, String.class, int.class);
             c = EntityTypes.class.getDeclaredField("c");
             d = EntityTypes.class.getDeclaredField("d");
             e = EntityTypes.class.getDeclaredField("e");
             f = EntityTypes.class.getDeclaredField("f");
             g = EntityTypes.class.getDeclaredField("g");
-        } catch (NoSuchFieldException e) {
+        }
+        catch (NoSuchFieldException e)
+        {
             e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void load(boolean hostile) {
-        try {
+    public void load(boolean hostile)
+    {
+        try
+        {
             ReflectionUtils.setAccessible(a, c, d, e, f, g);
 
             removeGiant();
 
-            if (hostile) {
+            if (hostile)
+            {
                 a.invoke(null, SmartGiantHostile.class, "Giant", 53);
-            } else {
+            }
+            else
+            {
                 a.invoke(null, SmartGiant.class, "Giant", 53);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void cleanup() {
-        try {
+    public void cleanup()
+    {
+        try
+        {
             ReflectionUtils.setAccessible(a, c, d, e, f, g);
-            
+
             removeGiant();
 
             a.invoke(null, EntityGiantZombie.class, "Giant", 53);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    private void removeGiant() throws IllegalAccessException {
+    private void removeGiant() throws IllegalAccessException
+    {
         Map cMap = (Map) c.get(null);
         Map dMap = (Map) d.get(null);
         Map eMap = (Map) e.get(null);

@@ -2,8 +2,10 @@ package me.jjm_223.smartgiants.entities.v1_10_R1.nms;
 
 import net.minecraft.server.v1_10_R1.*;
 
-public class SmartGiant extends EntityGiantZombie {
-    public SmartGiant(World world) {
+public class SmartGiant extends EntityGiantZombie
+{
+    public SmartGiant(World world)
+    {
         super(world);
 
         if (this instanceof SmartGiantHostile)
@@ -21,7 +23,8 @@ public class SmartGiant extends EntityGiantZombie {
     }
 
     @Override
-    public float a(BlockPosition position) {
+    public float a(BlockPosition position)
+    {
         return 0.5F - world.n(position);
     }
 }

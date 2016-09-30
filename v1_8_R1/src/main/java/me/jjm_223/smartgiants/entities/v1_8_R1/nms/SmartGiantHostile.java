@@ -1,29 +1,21 @@
 package me.jjm_223.smartgiants.entities.v1_8_R1.nms;
 
 import me.jjm_223.smartgiants.entities.v1_8_R1.nms.PathfinderGoals.PathfinderGoalStomp;
-import net.minecraft.server.v1_8_R1.EntityGiantZombie;
-import net.minecraft.server.v1_8_R1.EntityHuman;
-import net.minecraft.server.v1_8_R1.GenericAttributes;
-import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_8_R1.PathfinderGoalMoveTowardsRestriction;
-import net.minecraft.server.v1_8_R1.PathfinderGoalNearestAttackableTarget;
-import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_8_R1.World;
-import net.minecraft.server.v1_8_R1.BlockPosition;
+import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.Bukkit;
 
 /**
  * Created by Jacob on 3/16/2015.
  * Hostile AI for the SmartGiant
  */
-public class SmartGiantHostile extends SmartGiant {
+public class SmartGiantHostile extends SmartGiant
+{
 
     private static final double ATTACK_DAMAGE = Bukkit.getPluginManager().getPlugin("SmartGiants").getConfig()
             .getDouble("attackDamage");
 
-    public SmartGiantHostile(World world) {
+    public SmartGiantHostile(World world)
+    {
         super(world);
 
         width = 1;
@@ -40,13 +32,15 @@ public class SmartGiantHostile extends SmartGiant {
     }
 
     @Override
-    protected void aW() {
+    protected void aW()
+    {
         super.aW();
         this.getAttributeInstance(GenericAttributes.e).setValue(ATTACK_DAMAGE);
     }
 
     @Override
-    public float a(BlockPosition position) {
+    public float a(BlockPosition position)
+    {
         return 0.5F - world.o(position);
     }
 }
