@@ -1,11 +1,14 @@
 package me.jjm_223.smartgiants.listeners;
 
 import me.jjm_223.smartgiants.SmartGiants;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityCombustByEntityEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 public class EntityListener implements Listener
@@ -49,5 +52,35 @@ public class EntityListener implements Listener
 
         event.setCancelled(true);
         plugin.getGiantTools().spawnGiant(event.getLocation(), plugin.getConfig().getBoolean("isHostile"));
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onArrowDamage(EntityDamageByEntityEvent event)
+    {
+        if (plugin.giantsDamagedByArrows)
+        {
+            return;
+        }
+
+        if (plugin.getGiantTools().isSmartGiant(event.getEntity()) && event.getDamager().getType() == EntityType.ARROW)
+        {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onEntityCombust(EntityCombustByEntityEvent event)
+    {
+        if (plugin.giantsDamagedByArrows)
+        {
+            return;
+        }
+
+        Entity damaged = event.getEntity();
+
+        if (plugin.getGiantTools().isSmartGiant(damaged) && event.getCombuster().getType() == EntityType.ARROW)
+        {
+            event.setCancelled(true);
+        }
     }
 }

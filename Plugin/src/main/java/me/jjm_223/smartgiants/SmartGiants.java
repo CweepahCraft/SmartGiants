@@ -1,8 +1,8 @@
 package me.jjm_223.smartgiants;
 
-import me.jjm_223.smartgiants.api.entities.IGiantTools;
-import me.jjm_223.smartgiants.api.entities.ILoad;
-import me.jjm_223.smartgiants.api.entities.INaturalSpawns;
+import me.jjm_223.smartgiants.api.util.IGiantTools;
+import me.jjm_223.smartgiants.api.util.ILoad;
+import me.jjm_223.smartgiants.api.util.INaturalSpawns;
 import me.jjm_223.smartgiants.commands.*;
 import me.jjm_223.smartgiants.listeners.EntityListener;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -39,6 +39,9 @@ public class SmartGiants extends JavaPlugin
 
     private DropManager dropManager;
 
+    // Plugin configuration
+    public boolean giantsDamagedByArrows;
+
     @Override
     public void onLoad()
     {
@@ -46,8 +49,18 @@ public class SmartGiants extends JavaPlugin
         {
             saveResource("lang.yml", false);
         }
+
+        this.getConfig().options().copyDefaults(true);
         saveDefaultConfig();
+        loadConfig();
+        saveConfig();
+
         loadGiants();
+    }
+
+    private void loadConfig()
+    {
+        this.giantsDamagedByArrows = getConfig().getBoolean("giantsTakeArrowDamage");
     }
 
     @Override
