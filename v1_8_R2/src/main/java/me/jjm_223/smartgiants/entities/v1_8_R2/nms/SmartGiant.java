@@ -1,5 +1,6 @@
 package me.jjm_223.smartgiants.entities.v1_8_R2.nms;
 
+import me.jjm_223.smartgiants.api.entity.ISmartGiant;
 import net.minecraft.server.v1_8_R2.*;
 import org.bukkit.Bukkit;
 
@@ -7,7 +8,7 @@ import org.bukkit.Bukkit;
  * Created by Jacob on 3/14/2015.
  * Class for intelligent giant. For MC 1.8.3
  */
-public class SmartGiant extends EntityGiantZombie
+public class SmartGiant extends EntityGiantZombie implements ISmartGiant
 {
     private static final double HEALTH = Bukkit.getPluginManager().getPlugin("SmartGiants").getConfig()
             .getDouble("maxHealth");
@@ -36,5 +37,10 @@ public class SmartGiant extends EntityGiantZombie
     public float a(BlockPosition position)
     {
         return 0.5F - this.world.o(position);
+    }
+
+    public boolean isHostile()
+    {
+        return (this instanceof SmartGiantHostile);
     }
 }

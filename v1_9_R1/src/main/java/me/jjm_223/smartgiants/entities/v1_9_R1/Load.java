@@ -1,7 +1,7 @@
 package me.jjm_223.smartgiants.entities.v1_9_R1;
 
-import me.jjm_223.smartgiants.api.entities.ILoad;
-import me.jjm_223.smartgiants.api.utils.ReflectionUtils;
+import me.jjm_223.smartgiants.api.util.ILoad;
+import me.jjm_223.smartgiants.api.util.ReflectionUtils;
 import me.jjm_223.smartgiants.entities.v1_9_R1.nms.SmartGiant;
 import me.jjm_223.smartgiants.entities.v1_9_R1.nms.SmartGiantHostile;
 import net.minecraft.server.v1_9_R1.EntityGiantZombie;

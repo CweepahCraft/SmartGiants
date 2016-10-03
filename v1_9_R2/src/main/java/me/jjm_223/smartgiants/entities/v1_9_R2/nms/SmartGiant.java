@@ -1,9 +1,10 @@
 package me.jjm_223.smartgiants.entities.v1_9_R2.nms;
 
+import me.jjm_223.smartgiants.api.entity.ISmartGiant;
 import net.minecraft.server.v1_9_R2.*;
 import org.bukkit.Bukkit;
 
-public class SmartGiant extends EntityGiantZombie
+public class SmartGiant extends EntityGiantZombie implements ISmartGiant
 {
     private static final double HEALTH = Bukkit.getPluginManager().getPlugin("SmartGiants").getConfig()
             .getDouble("maxHealth");
@@ -32,5 +33,10 @@ public class SmartGiant extends EntityGiantZombie
     public float a(BlockPosition position)
     {
         return 0.5F - world.n(position);
+    }
+
+    public boolean isHostile()
+    {
+        return (this instanceof SmartGiantHostile);
     }
 }

@@ -1,6 +1,6 @@
 package me.jjm_223.smartgiants.entities.v1_8_R3;
 
-import me.jjm_223.smartgiants.api.entities.INaturalSpawns;
+import me.jjm_223.smartgiants.api.util.INaturalSpawns;
 import me.jjm_223.smartgiants.entities.v1_8_R3.nms.SmartGiant;
 import me.jjm_223.smartgiants.entities.v1_8_R3.nms.SmartGiantHostile;
 import net.minecraft.server.v1_8_R3.BiomeBase;

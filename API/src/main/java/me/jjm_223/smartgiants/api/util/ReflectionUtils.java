@@ -1,4 +1,4 @@
-package me.jjm_223.smartgiants.api.utils;
+package me.jjm_223.smartgiants.api.util;
 
 import java.lang.reflect.AccessibleObject;
 

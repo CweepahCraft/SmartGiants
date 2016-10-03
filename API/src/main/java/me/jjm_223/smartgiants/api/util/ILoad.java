@@ -1,4 +1,4 @@
-package me.jjm_223.smartgiants.api.entities;
+package me.jjm_223.smartgiants.api.util;
 
 public interface ILoad
 {
