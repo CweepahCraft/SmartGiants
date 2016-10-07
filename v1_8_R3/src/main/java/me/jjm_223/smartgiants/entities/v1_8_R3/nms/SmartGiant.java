@@ -18,6 +18,7 @@ public class SmartGiant extends EntityGiantZombie implements ISmartGiant
         super(world);
 
         this.getAttributeInstance(GenericAttributes.maxHealth).setValue(HEALTH);
+        setHealth((float) HEALTH);
 
         if (this instanceof SmartGiantHostile)
         {
