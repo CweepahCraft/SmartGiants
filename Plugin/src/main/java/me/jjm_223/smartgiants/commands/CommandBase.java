@@ -13,7 +13,7 @@ import static me.jjm_223.smartgiants.Messages.getLang;
 
 public class CommandBase implements CommandExecutor
 {
-    private static List<CommandBase> subCommands = new ArrayList<CommandBase>();
+    private static List<CommandBase> subCommands = new ArrayList<>();
 
     private final String name;
     private final String permission;
@@ -108,8 +108,6 @@ public class CommandBase implements CommandExecutor
     {
         return false;
     }
-
-    ;
 
     protected void lecture(CommandSender sender)
     {

@@ -1,10 +1,12 @@
 package me.jjm_223.smartgiants;
 
+import me.jjm_223.smartgiants.api.util.Configuration;
 import me.jjm_223.smartgiants.api.util.IGiantTools;
 import me.jjm_223.smartgiants.api.util.ILoad;
 import me.jjm_223.smartgiants.api.util.INaturalSpawns;
 import me.jjm_223.smartgiants.commands.*;
 import me.jjm_223.smartgiants.listeners.EntityListener;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -39,9 +41,6 @@ public class SmartGiants extends JavaPlugin
 
     private DropManager dropManager;
 
-    // Plugin configuration
-    public boolean giantsDamagedByArrows;
-
     @Override
     public void onLoad()
     {
@@ -52,15 +51,25 @@ public class SmartGiants extends JavaPlugin
 
         this.getConfig().options().copyDefaults(true);
         saveDefaultConfig();
-        loadConfig();
+
+        try
+        {
+            loadConfig();
+        }
+        catch (InvalidConfigurationException | IOException e)
+        {
+            e.printStackTrace();
+            this.setEnabled(false);
+        }
+
         saveConfig();
 
         loadGiants();
     }
 
-    private void loadConfig()
+    private void loadConfig() throws IOException, InvalidConfigurationException
     {
-        this.giantsDamagedByArrows = getConfig().getBoolean("giantsTakeArrowDamage");
+        Configuration.load(new File(getDataFolder(), "config.yml"));
     }
 
     @Override
@@ -105,10 +114,10 @@ public class SmartGiants extends JavaPlugin
 
     private void loadGiants()
     {
-        FileConfiguration config = this.getConfig();
+        Configuration config = Configuration.getInstance();
 
-        boolean natural = config.getBoolean("naturalSpawns");
-        boolean hostile = config.getBoolean("isHostile");
+        boolean natural = config.naturalSpawns();
+        boolean hostile = config.isHostile();
 
         String packageName = this.getServer().getClass().getPackage().getName();
         String version = packageName.substring(packageName.lastIndexOf('.') + 1);
@@ -118,19 +127,19 @@ public class SmartGiants extends JavaPlugin
         boolean daylight = getConfig().getBoolean("daylight");
         getLogger().info("Spawn during day?: " + daylight);
         getLogger().info("Giants are hostile?: " + hostile);
-        int frequency = config.getInt("frequency");
+        int frequency = config.frequency();
         if (frequency <= 0)
         {
             frequency = 5;
         }
         getLogger().info("Spawn frequency is: " + frequency);
-        int minGroupAmount = config.getInt("minGroupAmount");
+        int minGroupAmount = config.minGroupAmount();
         if (minGroupAmount <= 0)
         {
             minGroupAmount = 1;
         }
         getLogger().info("Minimum group amount is: " + minGroupAmount);
-        int maxGroupAmount = config.getInt("maxGroupAmount");
+        int maxGroupAmount = config.maxGroupAmount();
         if (maxGroupAmount <= 0 || maxGroupAmount < minGroupAmount)
         {
             maxGroupAmount = minGroupAmount + 1;
@@ -178,6 +187,7 @@ public class SmartGiants extends JavaPlugin
         new CommandRemove(this);
         new CommandReset(this);
         new CommandReloadDrops(this);
+        new CommandReloadConfig();
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 public class DropManager
 {
     private FileConfiguration config = new YamlConfiguration();
-    private List<Drop> drops = new ArrayList<Drop>();
+    private List<Drop> drops = new ArrayList<>();
     private File dropsFile;
 
     private ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -46,7 +46,7 @@ public class DropManager
     public List<ItemStack> getRandomDrops()
     {
 
-        List<ItemStack> results = new ArrayList<ItemStack>();
+        List<ItemStack> results = new ArrayList<>();
 
         for (Drop drop : drops)
         {

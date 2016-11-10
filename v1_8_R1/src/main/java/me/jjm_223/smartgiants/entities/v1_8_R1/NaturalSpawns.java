@@ -75,7 +75,7 @@ public class NaturalSpawns implements INaturalSpawns
             {
                 mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
             }
-            for (Object object : new ArrayList<Object>(mobs))
+            for (Object object : new ArrayList<>(mobs))
             {
                 BiomeMeta biomeMeta = ((BiomeMeta) object);
                 if (biomeMeta.b == SmartGiantHostile.class || biomeMeta.b == SmartGiant.class)

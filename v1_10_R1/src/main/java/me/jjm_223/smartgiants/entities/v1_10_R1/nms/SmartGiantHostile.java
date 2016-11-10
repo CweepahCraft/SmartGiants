@@ -1,5 +1,6 @@
 package me.jjm_223.smartgiants.entities.v1_10_R1.nms;
 
+import me.jjm_223.smartgiants.api.util.Configuration;
 import me.jjm_223.smartgiants.entities.v1_10_R1.nms.pathfindergoals.PathfinderGoalStomp;
 import net.minecraft.server.v1_10_R1.*;
 import org.bukkit.Bukkit;
@@ -7,10 +8,6 @@ import org.bukkit.Bukkit;
 @SuppressWarnings("unchecked")
 public class SmartGiantHostile extends SmartGiant
 {
-
-    private static final double ATTACK_DAMAGE = Bukkit.getPluginManager().getPlugin("SmartGiants").getConfig()
-            .getDouble("attackDamage");
-
     public SmartGiantHostile(World world)
     {
         super(world);
@@ -30,7 +27,7 @@ public class SmartGiantHostile extends SmartGiant
     protected void initAttributes()
     {
         super.initAttributes();
-        this.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE).setValue(ATTACK_DAMAGE);
+        this.getAttributeInstance(GenericAttributes.ATTACK_DAMAGE).setValue(Configuration.getInstance().attackDamage());
     }
 
     @Override

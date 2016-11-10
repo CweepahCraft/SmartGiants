@@ -31,11 +31,7 @@ public class Load implements ILoad
             f = EntityTypes.class.getDeclaredField("f");
             g = EntityTypes.class.getDeclaredField("g");
         }
-        catch (NoSuchFieldException e)
-        {
-            e.printStackTrace();
-        }
-        catch (NoSuchMethodException e)
+        catch (NoSuchFieldException | NoSuchMethodException e)
         {
             e.printStackTrace();
         }

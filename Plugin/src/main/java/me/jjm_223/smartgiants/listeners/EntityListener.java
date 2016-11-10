@@ -1,6 +1,7 @@
 package me.jjm_223.smartgiants.listeners;
 
 import me.jjm_223.smartgiants.SmartGiants;
+import me.jjm_223.smartgiants.api.util.Configuration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -57,7 +58,7 @@ public class EntityListener implements Listener
     @EventHandler(ignoreCancelled = true)
     public void onArrowDamage(EntityDamageByEntityEvent event)
     {
-        if (plugin.giantsDamagedByArrows)
+        if (Configuration.getInstance().giantsTakeArrowDamage())
         {
             return;
         }
@@ -71,7 +72,7 @@ public class EntityListener implements Listener
     @EventHandler(ignoreCancelled = true)
     public void onEntityCombust(EntityCombustByEntityEvent event)
     {
-        if (plugin.giantsDamagedByArrows)
+        if (Configuration.getInstance().giantsTakeArrowDamage())
         {
             return;
         }
