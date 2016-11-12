@@ -16,6 +16,9 @@ maxHealth: 100.0
 # Should Giants take arrow damage?
 giantsTakeArrowDamage: true
 
+# Should Giants take tipped arrow damage?
+giantsTakeTippedArrowDamage: true
+
 #### Natural spawn settings. ####
 
 # Let Giants spawn naturally?

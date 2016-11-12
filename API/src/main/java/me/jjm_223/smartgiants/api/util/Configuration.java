@@ -46,6 +46,12 @@ public class Configuration
         return config.getBoolean("giantsTakeArrowDamage");
     }
 
+    public boolean giantsTakeTippedArrowDamage()
+    {
+        verifyLoaded();
+        return config.getBoolean("giantsTakeTippedArrowDamage");
+    }
+
     public boolean naturalSpawns()
     {
         verifyLoaded();

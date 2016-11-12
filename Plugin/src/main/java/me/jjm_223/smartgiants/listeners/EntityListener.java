@@ -58,30 +58,30 @@ public class EntityListener implements Listener
     @EventHandler(ignoreCancelled = true)
     public void onArrowDamage(EntityDamageByEntityEvent event)
     {
-        if (Configuration.getInstance().giantsTakeArrowDamage())
+        if (!plugin.getGiantTools().isSmartGiant(event.getEntity()))
         {
             return;
         }
 
-        if (plugin.getGiantTools().isSmartGiant(event.getEntity()) && event.getDamager().getType() == EntityType.ARROW)
-        {
-            event.setCancelled(true);
-        }
+        EntityType type = event.getDamager().getType();
+        Configuration config = Configuration.getInstance();
+
+        event.setCancelled((type == EntityType.TIPPED_ARROW && !config.giantsTakeTippedArrowDamage())
+                || (type == EntityType.ARROW && !config.giantsTakeArrowDamage()));
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onEntityCombust(EntityCombustByEntityEvent event)
     {
-        if (Configuration.getInstance().giantsTakeArrowDamage())
+        if (!plugin.getGiantTools().isSmartGiant(event.getEntity()))
         {
             return;
         }
 
-        Entity damaged = event.getEntity();
+        EntityType type = event.getCombuster().getType();
+        Configuration config = Configuration.getInstance();
 
-        if (plugin.getGiantTools().isSmartGiant(damaged) && event.getCombuster().getType() == EntityType.ARROW)
-        {
-            event.setCancelled(true);
-        }
+        event.setCancelled((type == EntityType.TIPPED_ARROW && !config.giantsTakeTippedArrowDamage())
+                || (type == EntityType.ARROW && !config.giantsTakeArrowDamage()));
     }
 }
