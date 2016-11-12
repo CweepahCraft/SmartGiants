@@ -7,3 +7,4 @@ commands:
     smartgiants:
         usage: /smartgiants
         description: Commands for the SmartGiants plugin.
+        aliases: [sg, sgiants, giants]
