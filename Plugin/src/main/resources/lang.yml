@@ -18,3 +18,4 @@ lectureAdd: "&9/smartgiants add <minAmount> <maxAmount> <percentDropChance>&r - 
 lectureRemove: "&a/smartgiants remove&r - Removes the item in your hand from a Giant's drops."
 lectureReset: "&d/smartgiants reset&r - Removes all items from a Giant's drops."
 lectureReload: "&e/smartgiants reloadDrops&r - Reloads Giant drops from drops.yml."
+lectureReloadConfig: "&6/smartgiants reloadConfig&r - Reloads Giant configuration."
