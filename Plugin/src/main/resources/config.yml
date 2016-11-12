@@ -10,6 +10,9 @@ isHostile: false
 # How much damage should Giants do? (5.0 damage is 2.5 hearts)
 attackDamage: 5.0
 
+# Should attack damage obey game difficulty (higher for hard mode, less for easy mode)?
+damageObeyGameDifficulty: true
+
 # What should the maximum health of giants be?
 maxHealth: 100.0
 

@@ -34,6 +34,12 @@ public class Configuration
         return config.getDouble("attackDamage");
     }
 
+    public boolean damageObeyGameDifficulty()
+    {
+        verifyLoaded();
+        return config.getBoolean("damageObeyGameDifficulty");
+    }
+
     public double maxHealth()
     {
         verifyLoaded();

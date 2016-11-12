@@ -56,6 +56,20 @@ public class EntityListener implements Listener
     }
 
     @EventHandler(ignoreCancelled = true)
+    public void onGiantDamage(EntityDamageByEntityEvent event)
+    {
+        if (!plugin.getGiantTools().isSmartGiant(event.getDamager()))
+        {
+            return;
+        }
+
+        if (!Configuration.getInstance().damageObeyGameDifficulty())
+        {
+            event.setDamage(Configuration.getInstance().attackDamage());
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
     public void onArrowDamage(EntityDamageByEntityEvent event)
     {
         if (!plugin.getGiantTools().isSmartGiant(event.getEntity()))
