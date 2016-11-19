@@ -64,6 +64,11 @@
         </dependency>
         <dependency>
             <groupId>me.jjm_223.smartgiants</groupId>
+            <artifactId>SmartGiants-v1_11_R1</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.jjm_223.smartgiants</groupId>
             <artifactId>SmartGiants-API</artifactId>
             <version>${project.parent.version}</version>
             <type>jar</type>
