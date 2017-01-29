@@ -34,4 +34,10 @@ public class SmartGiant extends EntityGiantZombie implements ISmartGiant
     {
         return this instanceof SmartGiantHostile;
     }
+
+    @Override
+    public float a(BlockPosition position)
+    {
+        return 0.5F - world.n(position);
+    }
 }
