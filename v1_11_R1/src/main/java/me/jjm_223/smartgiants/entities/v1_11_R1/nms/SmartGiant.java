@@ -40,4 +40,36 @@ public class SmartGiant extends EntityGiantZombie implements ISmartGiant
     {
         return 0.5F - world.n(position);
     }
+
+    @Override
+    public boolean c(NBTTagCompound nbtTagCompound)
+    {
+        boolean success = super.c(nbtTagCompound);
+        if (!success && !this.dead)
+        {
+            nbtTagCompound.setString("id", "minecraft:giant");
+            this.e(nbtTagCompound);
+            return true;
+        }
+        else
+        {
+            return success;
+        }
+    }
+
+    @Override
+    public boolean d(NBTTagCompound nbtTagCompound)
+    {
+        boolean success = super.d(nbtTagCompound);
+        if (!success && !this.dead && !this.isPassenger())
+        {
+            nbtTagCompound.setString("id", "minecraft:giant");
+            this.e(nbtTagCompound);
+            return true;
+        }
+        else
+        {
+            return success;
+        }
+    }
 }

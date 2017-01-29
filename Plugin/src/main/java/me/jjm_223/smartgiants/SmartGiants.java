@@ -7,7 +7,6 @@ import me.jjm_223.smartgiants.api.util.INaturalSpawns;
 import me.jjm_223.smartgiants.commands.*;
 import me.jjm_223.smartgiants.listeners.EntityListener;
 import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,7 +31,6 @@ import java.io.IOException;
  */
 public class SmartGiants extends JavaPlugin
 {
-
     private boolean errorOnLoad;
 
     private ILoad load = null;
