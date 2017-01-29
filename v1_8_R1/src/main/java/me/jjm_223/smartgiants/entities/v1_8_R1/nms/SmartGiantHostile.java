@@ -15,8 +15,6 @@ public class SmartGiantHostile extends SmartGiant
     {
         super(world);
 
-        width = 1;
-
         this.goalSelector.a(0, new PathfinderGoalFloat(this));
         this.goalSelector.a(2, new PathfinderGoalStomp(this, EntityHuman.class, .5D, false));
         this.goalSelector.a(2, this.a);
@@ -32,11 +30,5 @@ public class SmartGiantHostile extends SmartGiant
     {
         super.aW();
         this.getAttributeInstance(GenericAttributes.e).setValue(Configuration.getInstance().attackDamage());
-    }
-
-    @Override
-    public float a(BlockPosition position)
-    {
-        return 0.5F - world.o(position);
     }
 }

@@ -43,8 +43,8 @@ public class NaturalSpawns implements INaturalSpawns
             List mobs = biomeBase.getMobs(EnumCreatureType.CREATURE);
             if (!mobs.isEmpty())
             {
-                mobs.add(new BiomeMeta(
-                        (hostile ? SmartGiantHostile.class : SmartGiant.class), frequency, minGroupAmount, maxGroupAmount));
+                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
+                        minGroupAmount, maxGroupAmount));
             }
         }
     }
@@ -56,8 +56,8 @@ public class NaturalSpawns implements INaturalSpawns
             List mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
             if (!mobs.isEmpty())
             {
-                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class),
-                        frequency, minGroupAmount, maxGroupAmount));
+                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
+                        minGroupAmount, maxGroupAmount));
             }
         }
     }
@@ -66,15 +66,8 @@ public class NaturalSpawns implements INaturalSpawns
     {
         for (BiomeBase biomeBase : BiomeBase.getBiomes())
         {
-            List mobs;
-            if (daylight)
-            {
-                mobs = biomeBase.getMobs(EnumCreatureType.CREATURE);
-            }
-            else
-            {
-                mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
-            }
+            List mobs = biomeBase.getMobs(daylight ? EnumCreatureType.CREATURE : EnumCreatureType.MONSTER);
+
             for (Object object : new ArrayList<>(mobs))
             {
                 BiomeMeta biomeMeta = ((BiomeMeta) object);

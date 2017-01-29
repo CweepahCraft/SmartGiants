@@ -12,7 +12,7 @@ import static me.jjm_223.smartgiants.Messages.getLang;
 
 public class CommandAdd extends CommandBase
 {
-    SmartGiants plugin;
+    private SmartGiants plugin;
 
     public CommandAdd(SmartGiants plugin)
     {

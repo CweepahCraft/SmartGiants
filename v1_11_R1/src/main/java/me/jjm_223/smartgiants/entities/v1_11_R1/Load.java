@@ -70,15 +70,7 @@ public class Load implements ILoad
         try
         {
             removeGiant(EntityGiantZombie.class);
-
-            if (hostile)
-            {
-                et_m_a.invoke(null, 53, "giant", SmartGiantHostile.class, "Giant");
-            }
-            else
-            {
-                et_m_a.invoke(null, 53, "giant", SmartGiant.class, "Giant");
-            }
+            et_m_a.invoke(null, 53, "giant", hostile ? SmartGiantHostile.class : SmartGiant.class, "Giant");
         }
         catch (InvocationTargetException | IllegalAccessException e)
         {

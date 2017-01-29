@@ -20,6 +20,8 @@ public class Load implements ILoad
     private Field g;
     private Method a;
 
+    private boolean hostile;
+
     public Load()
     {
         try
@@ -39,20 +41,15 @@ public class Load implements ILoad
 
     public void load(boolean hostile)
     {
+        this.hostile = hostile;
+
         try
         {
             ReflectionUtils.setAccessible(a, c, d, e, f, g);
 
-            removeGiant();
+            removeGiant(EntityGiantZombie.class);
 
-            if (hostile)
-            {
-                a.invoke(null, SmartGiantHostile.class, "Giant", 53);
-            }
-            else
-            {
-                a.invoke(null, SmartGiant.class, "Giant", 53);
-            }
+            a.invoke(null, hostile ? SmartGiantHostile.class : SmartGiant.class, "Giant", 53);
         }
         catch (Exception e)
         {
@@ -66,7 +63,7 @@ public class Load implements ILoad
         {
             ReflectionUtils.setAccessible(a, c, d, e, f, g);
 
-            removeGiant();
+            removeGiant(hostile ? SmartGiantHostile.class : SmartGiant.class);
 
             a.invoke(null, EntityGiantZombie.class, "Giant", 53);
         }
@@ -76,7 +73,7 @@ public class Load implements ILoad
         }
     }
 
-    private void removeGiant() throws IllegalAccessException
+    private void removeGiant(Class clazz) throws IllegalAccessException
     {
         Map cMap = (Map) c.get(null);
         Map dMap = (Map) d.get(null);
@@ -85,9 +82,9 @@ public class Load implements ILoad
         Map gMap = (Map) g.get(null);
 
         cMap.remove("Giant");
-        dMap.remove(EntityGiantZombie.class);
+        dMap.remove(clazz);
         eMap.remove(53);
-        fMap.remove(EntityGiantZombie.class);
+        fMap.remove(clazz);
         gMap.remove("Giant");
     }
 }

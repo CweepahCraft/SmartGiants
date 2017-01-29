@@ -16,12 +16,12 @@ public class SmartGiant extends EntityGiantZombie implements ISmartGiant
         this.getAttributeInstance(GenericAttributes.maxHealth).setValue(health);
         setHealth((float) health);
 
+        width = 1;
+
         if (this instanceof SmartGiantHostile)
         {
             return;
         }
-
-        width = 1;
 
         this.goalSelector.a(0, new PathfinderGoalFloat(this));
         this.goalSelector.a(1, new PathfinderGoalTempt(this, .9F, Items.APPLE, false));

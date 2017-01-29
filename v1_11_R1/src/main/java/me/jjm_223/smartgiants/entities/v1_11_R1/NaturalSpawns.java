@@ -4,6 +4,7 @@ import me.jjm_223.smartgiants.api.util.INaturalSpawns;
 import me.jjm_223.smartgiants.entities.v1_11_R1.nms.SmartGiant;
 import me.jjm_223.smartgiants.entities.v1_11_R1.nms.SmartGiantHostile;
 import net.minecraft.server.v1_11_R1.BiomeBase;
+import net.minecraft.server.v1_11_R1.BiomeBase.BiomeMeta;
 import net.minecraft.server.v1_11_R1.EnumCreatureType;
 
 import java.util.Iterator;
@@ -40,10 +41,11 @@ public class NaturalSpawns implements INaturalSpawns
     {
         for (BiomeBase biomeBase : BiomeBase.i)
         {
-            if (!biomeBase.getMobs(EnumCreatureType.CREATURE).isEmpty())
+            List mobs = biomeBase.getMobs(EnumCreatureType.CREATURE);
+            if (!mobs.isEmpty())
             {
-                biomeBase.getMobs(EnumCreatureType.CREATURE).add(new BiomeBase.BiomeMeta(
-                        (hostile ? SmartGiantHostile.class : SmartGiant.class), frequency, minGroupAmount, maxGroupAmount));
+                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
+                        minGroupAmount, maxGroupAmount));
             }
         }
     }
@@ -55,8 +57,8 @@ public class NaturalSpawns implements INaturalSpawns
             List<BiomeBase.BiomeMeta> mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
             if (!mobs.isEmpty())
             {
-                mobs.add(new BiomeBase.BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class),
-                        frequency, minGroupAmount, maxGroupAmount));
+                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
+                        minGroupAmount, maxGroupAmount));
             }
         }
     }
@@ -66,15 +68,7 @@ public class NaturalSpawns implements INaturalSpawns
     {
         for (BiomeBase biomeBase : BiomeBase.i)
         {
-            List<BiomeBase.BiomeMeta> mobs;
-            if (daylight)
-            {
-                mobs = biomeBase.getMobs(EnumCreatureType.CREATURE);
-            }
-            else
-            {
-                mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
-            }
+            List<BiomeBase.BiomeMeta> mobs = biomeBase.getMobs(daylight ? EnumCreatureType.CREATURE : EnumCreatureType.MONSTER);
 
             Iterator<BiomeBase.BiomeMeta> metaItr = mobs.iterator();
 

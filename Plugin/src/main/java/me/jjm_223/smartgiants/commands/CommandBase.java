@@ -20,7 +20,7 @@ public class CommandBase implements CommandExecutor
     private final boolean playerOnly;
     private final int minArgs;
 
-    public CommandBase(String name, String permission, boolean playerOnly, int minArgs)
+    CommandBase(String name, String permission, boolean playerOnly, int minArgs)
     {
         this.name = name;
         this.permission = permission;
