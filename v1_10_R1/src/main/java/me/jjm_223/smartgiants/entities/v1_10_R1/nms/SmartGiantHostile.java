@@ -3,7 +3,6 @@ package me.jjm_223.smartgiants.entities.v1_10_R1.nms;
 import me.jjm_223.smartgiants.api.util.Configuration;
 import me.jjm_223.smartgiants.entities.v1_10_R1.nms.pathfindergoals.PathfinderGoalStomp;
 import net.minecraft.server.v1_10_R1.*;
-import org.bukkit.Bukkit;
 
 @SuppressWarnings("unchecked")
 public class SmartGiantHostile extends SmartGiant

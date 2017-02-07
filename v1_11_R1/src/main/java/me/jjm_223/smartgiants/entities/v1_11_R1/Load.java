@@ -4,14 +4,11 @@ import me.jjm_223.smartgiants.api.util.ILoad;
 import me.jjm_223.smartgiants.api.util.ReflectionUtils;
 import me.jjm_223.smartgiants.entities.v1_11_R1.nms.SmartGiant;
 import me.jjm_223.smartgiants.entities.v1_11_R1.nms.SmartGiantHostile;
-import net.minecraft.server.v1_11_R1.*;
+import net.minecraft.server.v1_11_R1.EntityGiantZombie;
+import net.minecraft.server.v1_11_R1.EntityTypes;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class Load implements ILoad
 {

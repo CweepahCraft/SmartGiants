@@ -3,7 +3,6 @@ package me.jjm_223.smartgiants.entities.v1_8_R1.nms;
 import me.jjm_223.smartgiants.api.entity.ISmartGiant;
 import me.jjm_223.smartgiants.api.util.Configuration;
 import net.minecraft.server.v1_8_R1.*;
-import org.bukkit.Bukkit;
 
 public class SmartGiant extends EntityGiantZombie implements ISmartGiant
 {

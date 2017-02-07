@@ -3,7 +3,6 @@ package me.jjm_223.smartgiants.entities.v1_8_R3.nms;
 import me.jjm_223.smartgiants.api.entity.ISmartGiant;
 import me.jjm_223.smartgiants.api.util.Configuration;
 import net.minecraft.server.v1_8_R3.*;
-import org.bukkit.Bukkit;
 
 /**
  * Created by Jacob on 3/14/2015.

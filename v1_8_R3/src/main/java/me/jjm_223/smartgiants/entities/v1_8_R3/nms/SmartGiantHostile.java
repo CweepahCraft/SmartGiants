@@ -3,7 +3,6 @@ package me.jjm_223.smartgiants.entities.v1_8_R3.nms;
 import me.jjm_223.smartgiants.api.util.Configuration;
 import me.jjm_223.smartgiants.entities.v1_8_R3.nms.PathfinderGoals.PathfinderGoalStomp;
 import net.minecraft.server.v1_8_R3.*;
-import org.bukkit.Bukkit;
 
 /**
  * Created by Jacob on 3/16/2015.
