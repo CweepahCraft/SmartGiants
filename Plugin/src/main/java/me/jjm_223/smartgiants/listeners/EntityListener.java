@@ -24,7 +24,7 @@ public class EntityListener implements Listener
     @EventHandler
     public void onDeath(EntityDeathEvent event)
     {
-        if (event.getEntityType() == EntityType.GIANT)
+        if (event.getEntityType() == EntityType.GIANT && Configuration.getInstance().handleDrops())
         {
             event.getDrops().clear();
             event.getDrops().addAll(plugin.getDropManager().getRandomDrops());

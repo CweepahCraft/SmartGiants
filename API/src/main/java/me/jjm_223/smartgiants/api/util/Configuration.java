@@ -40,6 +40,12 @@ public class Configuration
         return config.getBoolean("damageObeyGameDifficulty");
     }
 
+    public boolean handleDrops()
+    {
+        verifyLoaded();
+        return config.getBoolean("handleDrops");
+    }
+
     public double maxHealth()
     {
         verifyLoaded();
