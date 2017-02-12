@@ -33,9 +33,10 @@ naturalSpawns: false
 # Spawn frequency (Witch is 5, Zombie is 100)
 frequency: 5
 
-# You'll have to experiment with these variables. I'm not able to wrap my head around them myself.
-# I've labeled them exactly as they are in Forge's API.
+# The smallest possible group size that can spawn
 minGroupAmount: 1
+
+# The largest possible group size that can spawn
 maxGroupAmount: 1
 
 # Should they spawn during day, or at night? (true = During the day, false = At night)
