@@ -25,73 +25,73 @@ public class Configuration
     public boolean isHostile()
     {
         verifyLoaded();
-        return config.getBoolean("isHostile");
+        return config.getBoolean("isHostile", false);
     }
 
     public double attackDamage()
     {
         verifyLoaded();
-        return config.getDouble("attackDamage");
+        return config.getDouble("attackDamage", 5.0);
     }
 
     public boolean damageObeyGameDifficulty()
     {
         verifyLoaded();
-        return config.getBoolean("damageObeyGameDifficulty");
+        return config.getBoolean("damageObeyGameDifficulty", true);
     }
 
     public boolean handleDrops()
     {
         verifyLoaded();
-        return config.getBoolean("handleDrops");
+        return config.getBoolean("handleDrops", true);
     }
 
     public double maxHealth()
     {
         verifyLoaded();
-        return config.getDouble("maxHealth");
+        return config.getDouble("maxHealth", 100.0);
     }
 
     public boolean giantsTakeArrowDamage()
     {
         verifyLoaded();
-        return config.getBoolean("giantsTakeArrowDamage");
+        return config.getBoolean("giantsTakeArrowDamage", true);
     }
 
     public boolean giantsTakeTippedArrowDamage()
     {
         verifyLoaded();
-        return config.getBoolean("giantsTakeTippedArrowDamage");
+        return config.getBoolean("giantsTakeTippedArrowDamage", true);
     }
 
     public boolean naturalSpawns()
     {
         verifyLoaded();
-        return config.getBoolean("naturalSpawns");
+        return config.getBoolean("naturalSpawns", false);
     }
 
     public int frequency()
     {
         verifyLoaded();
-        return config.getInt("frequency");
+        return config.getInt("frequency", 5);
     }
 
     public int minGroupAmount()
     {
         verifyLoaded();
-        return config.getInt("minGroupAmount");
+        return config.getInt("minGroupAmount", 1);
     }
 
     public int maxGroupAmount()
     {
         verifyLoaded();
-        return config.getInt("maxGroupAmount");
+        return config.getInt("maxGroupAmount", 1);
     }
 
     public boolean daylight()
     {
         verifyLoaded();
-        return config.getBoolean("daylight");
+        return config.getBoolean("daylight", false);
     }
 
     public List<String> worlds()
