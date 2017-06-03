@@ -36,28 +36,34 @@ public class NaturalSpawns implements INaturalSpawns
         }
     }
 
-    public void daylight()
+    private void daylight()
     {
         for (BiomeBase biomeBase : BiomeBase.i)
         {
-            List mobs = biomeBase.getMobs(EnumCreatureType.CREATURE);
-            if (!mobs.isEmpty())
+            if (biomeBase != null)
             {
-                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
-                        minGroupAmount, maxGroupAmount));
+                List<BiomeMeta> mobs = biomeBase.getMobs(EnumCreatureType.CREATURE);
+                if (!mobs.isEmpty())
+                {
+                    mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
+                            minGroupAmount, maxGroupAmount));
+                }
             }
         }
     }
 
-    public void night()
+    private void night()
     {
         for (BiomeBase biomeBase : BiomeBase.i)
         {
-            List mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
-            if (!mobs.isEmpty())
+            if (biomeBase != null)
             {
-                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
-                        minGroupAmount, maxGroupAmount));
+                List<BiomeMeta> mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
+                if (!mobs.isEmpty())
+                {
+                    mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
+                            minGroupAmount, maxGroupAmount));
+                }
             }
         }
     }
@@ -66,14 +72,16 @@ public class NaturalSpawns implements INaturalSpawns
     {
         for (BiomeBase biomeBase : BiomeBase.i)
         {
-            List mobs = biomeBase.getMobs(daylight ? EnumCreatureType.CREATURE : EnumCreatureType.MONSTER);
-
-            for (Object object : new ArrayList<>(mobs))
+            if (biomeBase != null)
             {
-                BiomeMeta biomeMeta = ((BiomeMeta) object);
-                if (biomeMeta.b == SmartGiantHostile.class || biomeMeta.b == SmartGiant.class)
+                List<BiomeMeta> mobs = biomeBase.getMobs(daylight ? EnumCreatureType.CREATURE : EnumCreatureType.MONSTER);
+                for (Object object : new ArrayList<>(mobs))
                 {
-                    mobs.remove(object);
+                    BiomeMeta biomeMeta = ((BiomeMeta) object);
+                    if (biomeMeta.b == SmartGiantHostile.class || biomeMeta.b == SmartGiant.class)
+                    {
+                        mobs.remove(object);
+                    }
                 }
             }
         }

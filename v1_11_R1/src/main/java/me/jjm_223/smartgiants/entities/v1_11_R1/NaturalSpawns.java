@@ -41,11 +41,14 @@ public class NaturalSpawns implements INaturalSpawns
     {
         for (BiomeBase biomeBase : BiomeBase.i)
         {
-            List mobs = biomeBase.getMobs(EnumCreatureType.CREATURE);
-            if (!mobs.isEmpty())
+            if (biomeBase != null)
             {
-                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
-                        minGroupAmount, maxGroupAmount));
+                List<BiomeMeta> mobs = biomeBase.getMobs(EnumCreatureType.CREATURE);
+                if (!mobs.isEmpty())
+                {
+                    mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
+                            minGroupAmount, maxGroupAmount));
+                }
             }
         }
     }
@@ -54,11 +57,14 @@ public class NaturalSpawns implements INaturalSpawns
     {
         for (BiomeBase biomeBase : BiomeBase.i)
         {
-            List<BiomeBase.BiomeMeta> mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
-            if (!mobs.isEmpty())
+            if (biomeBase != null)
             {
-                mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
-                        minGroupAmount, maxGroupAmount));
+                List<BiomeMeta> mobs = biomeBase.getMobs(EnumCreatureType.MONSTER);
+                if (!mobs.isEmpty())
+                {
+                    mobs.add(new BiomeMeta((hostile ? SmartGiantHostile.class : SmartGiant.class), frequency,
+                            minGroupAmount, maxGroupAmount));
+                }
             }
         }
     }

@@ -37,7 +37,7 @@ public class NaturalSpawns implements INaturalSpawns
         }
     }
 
-    public void daylight()
+    private void daylight()
     {
         for (BiomeBase biomeBase : BiomeBase.getBiomes())
         {
@@ -50,7 +50,7 @@ public class NaturalSpawns implements INaturalSpawns
         }
     }
 
-    public void night()
+    private void night()
     {
         for (BiomeBase biomeBase : BiomeBase.getBiomes())
         {
