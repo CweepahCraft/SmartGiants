@@ -91,6 +91,7 @@ public class SmartGiants extends JavaPlugin
         }
         else
         {
+            getLogger().severe("This version of Spigot isn't supported. Disabling.");
             this.setEnabled(false);
         }
     }
