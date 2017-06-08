@@ -191,7 +191,10 @@ public class SmartGiants extends JavaPlugin
     @Override
     public void onDisable()
     {
-        dropManager.shutdown();
+        if (dropManager != null)
+        {
+            dropManager.shutdown();
+        }
 
         if (load != null)
         {
