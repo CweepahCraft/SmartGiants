@@ -39,10 +39,7 @@ public class NaturalSpawns implements INaturalSpawns
 
     private void daylight()
     {
-        //noinspection unchecked
-        Iterable<BiomeBase> biomes = ((Iterable<BiomeBase>) BiomeBase.i);
-
-        for (BiomeBase biomeBase : biomes)
+        for (BiomeBase biomeBase : BiomeBase.REGISTRY_ID)
         {
             if (biomeBase != null)
             {
@@ -58,10 +55,7 @@ public class NaturalSpawns implements INaturalSpawns
 
     private void night()
     {
-        //noinspection unchecked
-        Iterable<BiomeBase> biomes = ((Iterable<BiomeBase>) BiomeBase.i);
-
-        for (BiomeBase biomeBase : biomes)
+        for (BiomeBase biomeBase : BiomeBase.REGISTRY_ID)
         {
             if (biomeBase != null)
             {
@@ -78,10 +72,7 @@ public class NaturalSpawns implements INaturalSpawns
     @Override
     public void cleanup()
     {
-        //noinspection unchecked
-        Iterable<BiomeBase> biomes = ((Iterable<BiomeBase>) BiomeBase.i);
-
-        for (BiomeBase biomeBase : biomes)
+        for (BiomeBase biomeBase : BiomeBase.REGISTRY_ID)
         {
             List<BiomeMeta> mobs = biomeBase.getMobs(daylight ? EnumCreatureType.CREATURE : EnumCreatureType.MONSTER);
             Iterator<BiomeMeta> metaItr = mobs.iterator();
