@@ -5,7 +5,7 @@
     <parent>
         <artifactId>smartgiants-parent</artifactId>
         <groupId>me.jjm_223.smartgiants</groupId>
-        <version>2.3.4</version>
+        <version>2.3.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>SmartGiants-API</artifactId>
