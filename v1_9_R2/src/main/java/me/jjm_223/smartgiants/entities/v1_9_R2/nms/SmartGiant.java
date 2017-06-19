@@ -15,6 +15,8 @@ public class SmartGiant extends EntityGiantZombie implements ISmartGiant
         this.getAttributeInstance(GenericAttributes.maxHealth).setValue(health);
         setHealth((float) health);
 
+        this.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED).setValue(Configuration.getInstance().movementSpeed());
+
         width = 1;
 
         if (this instanceof SmartGiantHostile)
@@ -23,8 +25,8 @@ public class SmartGiant extends EntityGiantZombie implements ISmartGiant
         }
 
         this.goalSelector.a(0, new PathfinderGoalFloat(this));
-        this.goalSelector.a(1, new PathfinderGoalTempt(this, .9F, Items.APPLE, false));
-        this.goalSelector.a(2, new PathfinderGoalRandomStroll(this, .9F));
+        this.goalSelector.a(1, new PathfinderGoalTempt(this, 1.0D, Items.APPLE, false));
+        this.goalSelector.a(2, new PathfinderGoalRandomStroll(this, 1.0D));
         this.goalSelector.a(3, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 16.0F));
         this.goalSelector.a(4, new PathfinderGoalRandomLookaround(this));
     }

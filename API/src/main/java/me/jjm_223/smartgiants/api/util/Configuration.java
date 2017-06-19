@@ -46,6 +46,12 @@ public class Configuration
         return config.getBoolean("handleDrops", true);
     }
 
+    public double movementSpeed()
+    {
+        verifyLoaded();
+        return config.getDouble("movementSpeed", 0.3);
+    }
+
     public double maxHealth()
     {
         verifyLoaded();
