@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class DropManager
 {
@@ -68,7 +69,7 @@ public class DropManager
             if (drop.getItem().isSimilar(item))
             {
                 drops.remove(drop);
-                saveFile();
+                queueFileSave();
                 return true;
             }
         }
@@ -79,13 +80,13 @@ public class DropManager
     public void addDrop(Drop drop)
     {
         drops.add(drop);
-        saveFile();
+        queueFileSave();
     }
 
     public void resetDrops()
     {
         drops.clear();
-        saveFile();
+        queueFileSave();
     }
 
     private void updateConfig()
@@ -121,7 +122,7 @@ public class DropManager
         }
     }
 
-    private void saveFile()
+    private void queueFileSave()
     {
         updateConfig();
         executor.submit(new Runnable()
@@ -142,7 +143,12 @@ public class DropManager
 
     public void shutdown()
     {
-        saveFile();
+        queueFileSave();
         executor.shutdown();
+        try
+        {
+            executor.awaitTermination(5L, TimeUnit.MINUTES);
+        }
+        catch (InterruptedException ignored) {} // Not much we can do at this point
     }
 }
