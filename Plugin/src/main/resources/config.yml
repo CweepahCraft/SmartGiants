@@ -19,6 +19,9 @@ handleDrops: true
 # How fast should giants move? This value is used to set the generic attribute. Treat it how you would if you were spawning it in game with NBT data.
 movementSpeed: 0.3
 
+# How far away should they be able to see players? This affects following distance for both tempting with apples and attacking players.
+followRange: 16.0
+
 # What should the maximum health of giants be?
 maxHealth: 100.0
 

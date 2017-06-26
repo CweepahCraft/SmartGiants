@@ -52,6 +52,12 @@ public class Configuration
         return config.getDouble("movementSpeed", 0.3);
     }
 
+    public double followRange()
+    {
+        verifyLoaded();
+        return config.getDouble("followRange", 16.0);
+    }
+
     public double maxHealth()
     {
         verifyLoaded();
