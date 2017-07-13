@@ -77,7 +77,8 @@ public class EntityListener implements Listener
         EntityType type = event.getDamager().getType();
         Configuration config = Configuration.getInstance();
 
-        event.setCancelled((type == EntityType.TIPPED_ARROW && !config.giantsTakeTippedArrowDamage())
+        event.setCancelled((!plugin.getVersion().startsWith("v1_8_R") && type == EntityType.TIPPED_ARROW
+                && !config.giantsTakeTippedArrowDamage())
                 || (type == EntityType.ARROW && !config.giantsTakeArrowDamage()));
     }
 

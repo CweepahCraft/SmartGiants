@@ -36,6 +36,7 @@ public class SmartGiants extends JavaPlugin
     private ILoad load = null;
     private INaturalSpawns naturalSpawns = null;
     private IGiantTools giantTools = null;
+    private String version;
 
     private DropManager dropManager;
 
@@ -119,7 +120,7 @@ public class SmartGiants extends JavaPlugin
         boolean hostile = config.isHostile();
 
         String packageName = this.getServer().getClass().getPackage().getName();
-        String version = packageName.substring(packageName.lastIndexOf('.') + 1);
+        version = packageName.substring(packageName.lastIndexOf('.') + 1);
 
         this.getLogger().info("Loading support for version: " + version);
         getLogger().info("Spawn naturally?: " + natural);
@@ -216,5 +217,10 @@ public class SmartGiants extends JavaPlugin
     public DropManager getDropManager()
     {
         return dropManager;
+    }
+
+    public String getVersion()
+    {
+        return version;
     }
 }
