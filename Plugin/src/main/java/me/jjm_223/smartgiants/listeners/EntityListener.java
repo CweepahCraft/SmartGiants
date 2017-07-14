@@ -2,6 +2,7 @@ package me.jjm_223.smartgiants.listeners;
 
 import me.jjm_223.smartgiants.SmartGiants;
 import me.jjm_223.smartgiants.api.util.Configuration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -69,31 +70,22 @@ public class EntityListener implements Listener
     @EventHandler(ignoreCancelled = true)
     public void onArrowDamage(EntityDamageByEntityEvent event)
     {
-        if (!plugin.getGiantTools().isSmartGiant(event.getEntity()))
-        {
-            return;
-        }
-
-        EntityType type = event.getDamager().getType();
-        Configuration config = Configuration.getInstance();
-
-        event.setCancelled((!plugin.getVersion().startsWith("v1_8_R") && type == EntityType.TIPPED_ARROW
-                && !config.giantsTakeTippedArrowDamage())
-                || (type == EntityType.ARROW && !config.giantsTakeArrowDamage()));
+        event.setCancelled(shouldProtectFromArrow(event.getEntity(), event.getDamager().getType()));
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onEntityCombust(EntityCombustByEntityEvent event)
     {
-        if (!plugin.getGiantTools().isSmartGiant(event.getEntity()))
-        {
-            return;
-        }
+        event.setCancelled(shouldProtectFromArrow(event.getEntity(), event.getCombuster().getType()));
+    }
 
-        EntityType type = event.getCombuster().getType();
+    private boolean shouldProtectFromArrow(Entity damagedEntity, EntityType arrowType)
+    {
         Configuration config = Configuration.getInstance();
 
-        event.setCancelled((type == EntityType.TIPPED_ARROW && !config.giantsTakeTippedArrowDamage())
-                || (type == EntityType.ARROW && !config.giantsTakeArrowDamage()));
+        return plugin.getGiantTools().isSmartGiant(damagedEntity) &&
+                ((!plugin.getVersion().startsWith("v1_8_R") && arrowType == EntityType.TIPPED_ARROW
+                        && !config.giantsTakeTippedArrowDamage())
+                || (arrowType == EntityType.ARROW && !config.giantsTakeArrowDamage()));
     }
 }
