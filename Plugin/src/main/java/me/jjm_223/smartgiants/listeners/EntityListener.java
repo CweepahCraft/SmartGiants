@@ -13,6 +13,9 @@ import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
+import javax.annotation.Nonnull;
+import java.util.List;
+
 public class EntityListener implements Listener
 {
     private SmartGiants plugin;
@@ -38,11 +41,24 @@ public class EntityListener implements Listener
         SpawnReason reason = event.getSpawnReason();
         if ((reason == SpawnReason.CHUNK_GEN || reason == SpawnReason.NATURAL) && event.getEntityType() == EntityType.GIANT)
         {
-            if (!(Configuration.getInstance().worlds().contains(event.getLocation().getWorld().getName())))
+            if (!containsIgnoreCase(Configuration.getInstance().worlds(), event.getEntity().getWorld().getName()))
             {
                 event.setCancelled(true);
             }
         }
+    }
+
+    private boolean containsIgnoreCase(@Nonnull List<String> sourceList, @Nonnull String search)
+    {
+        for (String string : sourceList)
+        {
+            if (search.equalsIgnoreCase(string))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
