@@ -28,13 +28,6 @@
         <module>v1_12_R1</module>
     </modules>
 
-    <repositories>
-        <repository>
-            <id>repo</id>
-            <url>http://cweepahcraft.net/repo</url>
-        </repository>
-    </repositories>
-
     <licenses>
         <license>
             <name>GPLv3</name>
